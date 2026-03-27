@@ -3,19 +3,28 @@ import recipes from "./data/recipes.json";
 import styles from "./App.module.css";
 import RecipeList from "./components/RecipeList/RecipeList.jsx";
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
+import IngredientsFilter from "./components/IngredientsFilter/IngredientsFilter.jsx";
 
 export default function App() {
   const [orderedRecipes, setOrderedRecipes] = useState(recipes);
+  const [searchText, setSearchText] = useState("");
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   function handleToggleOrder() {
     setOrderedRecipes((prev) => [...prev].reverse());
   }
 
-  const [searchText, setSearchText] = useState("");
+  const filteredRecipe = orderedRecipes.filter((r) => {
+    const matchesSearch = r.name
+      .toLocaleLowerCase()
+      .includes(searchText.toLocaleLowerCase());
 
-  const filteredRecipe = orderedRecipes.filter((r) =>
-    r.name.toLowerCase().includes(searchText.toLocaleLowerCase()),
-  );
+    const matchesIngredients =
+      selectedIngredients.length == 0 ||
+      selectedIngredients.some((ing) => r.ingredients.includes(ing));
+
+    return matchesSearch && matchesIngredients;
+  });
 
   return (
     <div className={styles.app}>
@@ -33,7 +42,14 @@ export default function App() {
       </header>
 
       <main className={styles.main}>
-        <SearchBar searchText={searchText} setSearchText={setSearchText} />
+        <div className={styles.filter}>
+          <SearchBar searchText={searchText} setSearchText={setSearchText} />
+          <IngredientsFilter
+            recipes={recipes}
+            selectedIngredients={selectedIngredients}
+            setSelectedIngredients={setSelectedIngredients}
+          />
+        </div>
         <RecipeList recipes={filteredRecipe} />
       </main>
     </div>
