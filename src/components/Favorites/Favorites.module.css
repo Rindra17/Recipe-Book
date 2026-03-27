@@ -1,0 +1,43 @@
+.container {
+  margin: 1rem 0;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #c9c2b6;
+  background: #fff;
+  color: #2a2620;
+  cursor: pointer;
+  outline: none;
+  gap: 0.5rem;
+}
+
+.toggleBtn.active {
+  background: #fff5f5;
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+.toggleBtn:hover {
+  background: #f6f4f1;
+}
+
+.badge {
+  background: #eee;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.toggleBtn.active .badge {
+  background: #ff4d4d;
+  color: white;
+}

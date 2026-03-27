@@ -1,16 +1,9 @@
-import { useState } from 'react'
-import styles from './RecipeCard.module.css'
+import styles from "./RecipeCard.module.css";
 
-export default function RecipeCard({ recipe }) {
-  const [pinned, setPinned] = useState(false)
-
+export default function RecipeCard({ recipe, isFavorite, onToggleFavorite }) {
   return (
-    <article className={`${styles.card} ${pinned ? styles.pinned : ''}`}>
-      <img
-        className={styles.image}
-        src={recipe.image}
-        alt=""
-      />
+    <article className={`${styles.card} ${isFavorite ? styles.pinned : ""}`}>
+      <img className={styles.image} src={recipe.image} alt="" />
       <div className={styles.body}>
         <h2 className={styles.name}>{recipe.name}</h2>
         <span className={styles.badge}>{recipe.category}</span>
@@ -18,11 +11,11 @@ export default function RecipeCard({ recipe }) {
         <button
           type="button"
           className={styles.pin}
-          onClick={() => setPinned((p) => !p)}
+          onClick={() => onToggleFavorite(recipe.id)}
         >
-          {pinned ? 'Unpin' : 'Pin'}
+          {isFavorite ? "❤️" : "🤍"}
         </button>
       </div>
     </article>
-  )
+  );
 }

@@ -18,6 +18,12 @@
   gap: 0.75rem 1rem;
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .title {
   margin: 0;
   font-size: 1.5rem;
@@ -35,6 +41,7 @@
   background: #fff;
   color: #2a2620;
   cursor: pointer;
+  outline: none;
 }
 
 .toggle:hover {
